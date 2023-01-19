@@ -1,0 +1,67 @@
+using System;
+using System.Collections;
+using GameArchitecture.Pool;
+using GameArchitecture.Weapon.Bullets;
+using UnityEngine;
+
+namespace GameArchitecture.Weapon
+{
+    public class RealoadableWeapon : Weapon
+    {
+        [SerializeField] protected float Ammunition;
+        [SerializeField] protected float Girth;
+        [SerializeField] protected float ReloadTime;
+        [SerializeField] protected int ProjectileCount;
+        [SerializeField] protected Transform BulletSpawnPlace;
+        [SerializeField] protected float BulletSpeed;
+        
+        [SerializeField] private Projectile _bulletPrefab;
+        [SerializeField] private float _currentGirth;
+        protected bool CanAttack = true;
+
+        protected ObjectPool<Projectile> BulletPool;
+
+        private void OnEnable()
+        {
+            CanAttack = true;
+        }
+
+        public override void Attack(Vector2 direction)
+        {
+            base.Attack(direction);
+            _currentGirth--;
+            if(_currentGirth <= 0) Reload();
+            if(!CanAttack) return;
+            StartDelay(AttackDelay);
+        }
+
+        public void Reload()
+        {
+            if(!CanAttack) return;
+            _currentGirth = Girth;
+            Ammunition -= Girth;
+            StartDelay(ReloadTime);
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            BulletPool = new ObjectPool<Projectile>(_bulletPrefab,
+                10, new GameObject().transform, true);
+            _currentGirth = Girth;
+        }
+
+        private void StartDelay(float delay)
+        {
+            CanAttack = false;
+            StartCoroutine(Delay(delay));
+        }
+
+
+        private IEnumerator Delay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            CanAttack = true;
+        }
+    }
+}
