@@ -47,7 +47,7 @@ namespace GameArchitecture.Weapon
         {
             base.Start();
             BulletPool = new ObjectPool<Projectile>(_bulletPrefab,
-                10, new GameObject().transform, true);
+                10, true);
             _currentGirth = Girth;
         }
 

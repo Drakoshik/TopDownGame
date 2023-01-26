@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -10,32 +11,31 @@ namespace GameArchitecture.Pool
     {
         private readonly T _prefab;
         private readonly bool _autoExpand;
-        private readonly GameObject _container;
+        private readonly Transform _container;
         private List<T> _pool;
 
-        public ObjectPool(T prefab, int count, Transform mainContainer, bool autoExpand)
+        public ObjectPool(T prefab, int count, bool autoExpand)
         {
             this._prefab = prefab;
-            _container = Object.Instantiate(new GameObject(), mainContainer);
-            _container.name = prefab.name;
+            var container = new GameObject();
+            _container = container.transform;
+            container.name = prefab.name;
             this._autoExpand = autoExpand;
-            this.CreatePool(count, _container.transform);
+            this.CreatePool(count);
         }
 
-        private void CreatePool(int count, Transform container)
+        private void CreatePool(int count)
         {
             this._pool = new List<T>();
-
             for (var i = 0; i < count; i++)
             {
-                this.CreateObject(container);
+                this.CreateObject(this._container);
             }
-
         }
 
-        private T CreateObject(Transform container, bool isActive = false)
+        private T CreateObject(bool isActive = false)
         {
-            var createdObject = Object.Instantiate(this._prefab, container);
+            var createdObject = Object.Instantiate(this._prefab, this._container);
             createdObject.gameObject.SetActive(isActive);
             this._pool.Add(createdObject);
             return createdObject;
@@ -53,7 +53,7 @@ namespace GameArchitecture.Pool
             
         
             if (this._autoExpand)
-                return this.CreateObject(_container.transform, true);
+                return this.CreateObject(true);
         
             throw new Exception("No free elements");
         }
