@@ -43,7 +43,7 @@ namespace GameArchitecture.Character
             _mainCamera = Camera.main;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             ReadMovementInput();
             Move();

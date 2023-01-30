@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GameArchitecture.Character
 {
@@ -11,10 +12,31 @@ namespace GameArchitecture.Character
         private int _playerClonesAmount;
 
         private float _timer;
+        private bool _isShoot;
+        private bool _isReload;
+        private bool _isChangeWeapon;
         
         private void Start()
         {
             _playerClonesAmount = 0;
+            _player.InputActions.Player.Shoot.started += OnShoot;
+            _player.InputActions.Player.Reload.started += OnReload;
+            _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
+        }
+
+        private void OnChangeWeapon(InputAction.CallbackContext obj)
+        {
+            _isChangeWeapon = true;
+        }
+
+        private void OnReload(InputAction.CallbackContext obj)
+        {
+            _isReload = true;
+        }
+
+        private void OnShoot(InputAction.CallbackContext obj)
+        {
+            _isShoot = true;
         }
 
         private void Update()
@@ -32,8 +54,11 @@ namespace GameArchitecture.Character
             if(PlayerReplayData.PlayerReplays.Count <= 0) return;
             _timer += Time.deltaTime;
             PlayerReplayData.PlayerReplays[PlayerReplayData.PlayerReplays.Count-1].
-                Add(_timer, new ReplayData(_player.MoveInput, _player.LookInput));
-            print(_timer);
+                Add(_timer, new ReplayData(_player.MoveInput, _player.LookInput,
+                    _isShoot, _isReload, _isChangeWeapon));
+            _isShoot = false;
+            _isReload = false;
+            _isChangeWeapon = false;
         }
     }
 }

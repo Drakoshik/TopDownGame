@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace GameArchitecture.Character
+namespace GameArchitecture.Character.PlayerClone
 {
     public class CloneController : MonoBehaviour
     {
@@ -45,8 +44,10 @@ namespace GameArchitecture.Character
                 [_inScriptTimer].MovementInput.x);
             _playerAnimator.SetFloat(MovementY, PlayerReplayData.PlayerReplays[_cloneNumber]
                 [_inScriptTimer].MovementInput.y);
-            print(transform.position);
             
+            if(PlayerReplayData.PlayerReplays[_cloneNumber]
+               [_inScriptTimer].IsShoot) print("sladjrkfhgbsou");
+
         }
         
 

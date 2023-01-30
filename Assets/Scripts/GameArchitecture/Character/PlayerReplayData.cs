@@ -11,9 +11,9 @@ namespace GameArchitecture.Character
         public bool IsShoot { get; private set;}
         public bool IsReload { get; private set;}
         public bool IsChangeWeapon { get; private set;}
-        
-        
-        
+
+
+
         public ReplayData(Vector2 movementInput, Vector2 lookInput,
             bool isShoot = false, bool isReload= false, bool isChangeWeapon= false)
         {
