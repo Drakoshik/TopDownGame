@@ -15,6 +15,7 @@ namespace GameArchitecture.Character
 
         public event Action<Vector3> OnLookInput; 
         public Vector2 LookInput { get; private set; }
+        public Vector2 MoveInput { get; private set; }
 
         private InputDevice _currentDevice;
     
@@ -88,6 +89,7 @@ namespace GameArchitecture.Character
             transform.position += new Vector3(_movementInput.x * speedMultiplier,
                 _movementInput.y * speedMultiplier,
                 0f) * Time.deltaTime ;
+            MoveInput = transform.position;
         
             _playerAnimator.SetFloat(MovementX, _movementInput.x);
             _playerAnimator.SetFloat(MovementY, _movementInput.y);

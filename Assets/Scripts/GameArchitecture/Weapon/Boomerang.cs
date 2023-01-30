@@ -24,7 +24,7 @@ namespace GameArchitecture.Weapon
         {
             base.Start();
             BulletPool = new ObjectPool<Projectile>(bulletPrefab,
-                10, true);
+                1, true);
         }
         public override void Attack(Vector2 direction)
         {

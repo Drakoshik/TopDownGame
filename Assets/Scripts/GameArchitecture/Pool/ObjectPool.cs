@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -29,7 +28,7 @@ namespace GameArchitecture.Pool
             this._pool = new List<T>();
             for (var i = 0; i < count; i++)
             {
-                this.CreateObject(this._container);
+                this.CreateObject();
             }
         }
 
