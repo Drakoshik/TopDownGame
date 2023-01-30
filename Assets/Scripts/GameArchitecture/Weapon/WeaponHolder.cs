@@ -11,6 +11,8 @@ namespace GameArchitecture.Weapon
         [field: SerializeField] public Weapon CurrentWeapon { get; protected set; }
         [field: SerializeField] public List<Weapon> WeaponList{ get; protected set; }
         
+        [field: SerializeField] public GameObject Holder { get; protected set; }
+        
         private bool _canRotate = true;
 
         protected virtual void Start()

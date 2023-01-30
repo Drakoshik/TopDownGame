@@ -61,18 +61,21 @@ namespace GameArchitecture.Character.PlayerClone
 
         private void EndOfLifetimeAction()
         {
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
 
         private void InvokeActions(ReplayData playerReplayData)
         {
             OnLook?.Invoke(playerReplayData.LookInput);
 
-            if (playerReplayData.IsShoot) OnShoot?.Invoke(playerReplayData.LookInput);
+            if (playerReplayData.IsShoot) 
+                OnShoot?.Invoke(playerReplayData.LookInput);
 
-            if (playerReplayData.IsReload) OnReload?.Invoke();
+            if (playerReplayData.IsReload) 
+                OnReload?.Invoke();
 
-            if (playerReplayData.IsChangeWeapon) OnChangeWeapon?.Invoke();
+            if (playerReplayData.IsChangeWeapon) 
+                OnChangeWeapon?.Invoke();
         }
     }
 }

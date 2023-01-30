@@ -4342,6 +4342,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14f89d51c87cccf46b1ec6380046a825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1249459525 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1168050350456270297, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+  m_PrefabInstance: {fileID: 5704776183476380537}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4d2a5f206540f4a9b8ddfa4714c9b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1261964095
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,6 +4779,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1546297899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5704776184481268050, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+  m_PrefabInstance: {fileID: 5704776183476380537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1648243981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,6 +4966,7 @@ MonoBehaviour:
   <WeaponList>k__BackingField:
   - {fileID: 1217109519}
   - {fileID: 775706834}
+  <Holder>k__BackingField: {fileID: 0}
   _player: {fileID: 759234384}
 --- !u!1 &1700213986
 GameObject:
@@ -5236,6 +5253,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1851331986}
   m_CullTransparentMesh: 1
+--- !u!114 &1894582696 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5059065029916993782, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+  m_PrefabInstance: {fileID: 5704776183476380537}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f89d51c87cccf46b1ec6380046a825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921972944
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,6 +6258,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTimeClone
       objectReference: {fileID: 0}
+    - target: {fileID: 5704776184616043338, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+      propertyPath: <Holder>k__BackingField
+      value: 
+      objectReference: {fileID: 1546297899}
+    - target: {fileID: 5704776184616043338, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+      propertyPath: <WeaponList>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5704776184616043338, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+      propertyPath: <WeaponList>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 1894582696}
+    - target: {fileID: 5704776184616043338, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
+      propertyPath: <WeaponList>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 1249459525}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efe7f96bcb7aaeb43a7a0fde1de2a5d5, type: 3}
 --- !u!1001 &6854144571337993009
