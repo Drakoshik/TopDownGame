@@ -8,9 +8,7 @@ namespace GameArchitecture.Character
     public class PlayerInputRecorder : MonoBehaviour
     {
         [SerializeField] private PlayerMovement _player;
-
-        private int _playerClonesAmount;
-
+        
         private float _timer;
         private bool _isShoot;
         private bool _isReload;
@@ -18,10 +16,16 @@ namespace GameArchitecture.Character
         
         private void Start()
         {
-            _playerClonesAmount = 0;
             _player.InputActions.Player.Shoot.started += OnShoot;
             _player.InputActions.Player.Reload.started += OnReload;
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
+            StartRecord();
+        }
+
+        public void StartRecord()
+        {
+            _timer = 0;
+            PlayerReplayData.PlayerReplays.Add(new Dictionary<float, ReplayData>());
         }
 
         private void OnChangeWeapon(InputAction.CallbackContext obj)
@@ -39,15 +43,15 @@ namespace GameArchitecture.Character
             _isShoot = true;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _timer = 0;
-                PlayerReplayData.PlayerReplays.Add(new Dictionary<float, ReplayData>());
-                print(PlayerReplayData.PlayerReplays.Count);
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Space))
+        //     {
+        //         _timer = 0;
+        //         PlayerReplayData.PlayerReplays.Add(new Dictionary<float, ReplayData>());
+        //         print(PlayerReplayData.PlayerReplays.Count);
+        //     }
+        // }
 
         private void FixedUpdate()
         {

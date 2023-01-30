@@ -1,19 +1,21 @@
+using System;
+using System.Collections.Generic;
+using GameArchitecture.Weapon;
 using UnityEngine;
 
 namespace GameArchitecture.Character.PlayerClone
 {
     public class CloneEntity : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private CloneController _cloneController;
+        [SerializeField] private CloneWeaponHolder _cloneWeaponHolder;
         
-        }
-
-        // Update is called once per frame
-        void Update()
+        public void SetUpClone(int cloneNumber, Weapon.Weapon currentWeapon,
+            List<Weapon.Weapon> weaponList)
         {
-        
+            _cloneController.SetCloneNumber(cloneNumber);
+            _cloneWeaponHolder.SetUpCloneWeaponHolder(_cloneController,
+                currentWeapon, weaponList);
         }
     }
 }

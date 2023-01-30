@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 
 namespace GameArchitecture.Character.PlayerClone
 {
     public class CloneController : MonoBehaviour
     {
+        public event Action<Vector3> OnLook; 
+        public event Action<Vector3> OnShoot; 
+        public event Action OnReload; 
+        public event Action OnChangeWeapon; 
+        
+        
+        
         private int _cloneNumber;
         private float _inScriptTimer;
         
@@ -19,48 +27,52 @@ namespace GameArchitecture.Character.PlayerClone
             _playerAnimator = GetComponent<Animator>();
         }
 
-        private void Start()
-        {
-            
-        }
-
         private void OnEnable()
         {
             _inScriptTimer = 0;
         }
 
+        public void SetCloneNumber(int cloneNumber)
+        {
+            _cloneNumber = cloneNumber;
+        }
+
         private void FixedUpdate()
         {
+            
             if(PlayerReplayData.PlayerReplays.Count <= 0) return;
             _inScriptTimer += Time.deltaTime;
-            _playerAnimator.SetFloat(LastX, PlayerReplayData.PlayerReplays[_cloneNumber]
-                [_inScriptTimer].LookInput.x);
-            _playerAnimator.SetFloat(LastY, PlayerReplayData.PlayerReplays[_cloneNumber]
-                [_inScriptTimer].LookInput.y);
+            if (!PlayerReplayData.PlayerReplays[_cloneNumber].ContainsKey(_inScriptTimer))
+            {
+                EndOfLifetimeAction();
+                return;
+            }
+            var playerReplayData = PlayerReplayData.PlayerReplays[_cloneNumber]
+                [_inScriptTimer];
+            _playerAnimator.SetFloat(LastX, playerReplayData.LookInput.x);
+            _playerAnimator.SetFloat(LastY, playerReplayData.LookInput.y);
 
-            transform.position = (Vector3)PlayerReplayData.PlayerReplays[_cloneNumber]
-                [_inScriptTimer].MovementInput;
-            _playerAnimator.SetFloat(MovementX, PlayerReplayData.PlayerReplays[_cloneNumber]
-                [_inScriptTimer].MovementInput.x);
-            _playerAnimator.SetFloat(MovementY, PlayerReplayData.PlayerReplays[_cloneNumber]
-                [_inScriptTimer].MovementInput.y);
+            transform.position = (Vector3)playerReplayData.MovementInput;
+            _playerAnimator.SetFloat(MovementX, playerReplayData.MovementInput.x);
+            _playerAnimator.SetFloat(MovementY, playerReplayData.MovementInput.y);
             
-            if(PlayerReplayData.PlayerReplays[_cloneNumber]
-               [_inScriptTimer].IsShoot) print("sladjrkfhgbsou");
-
-        }
-        
-
-        private void ReadLookInput()
-        {
-            
-            
+            InvokeActions(playerReplayData);
         }
 
-        private void Move()
+        private void EndOfLifetimeAction()
         {
-            
-            
+            gameObject.SetActive(false);
+        }
+
+        private void InvokeActions(ReplayData playerReplayData)
+        {
+            OnLook?.Invoke(playerReplayData.LookInput);
+
+            if (playerReplayData.IsShoot) OnShoot?.Invoke(playerReplayData.LookInput);
+
+            if (playerReplayData.IsReload) OnReload?.Invoke();
+
+            if (playerReplayData.IsChangeWeapon) OnChangeWeapon?.Invoke();
         }
     }
 }
