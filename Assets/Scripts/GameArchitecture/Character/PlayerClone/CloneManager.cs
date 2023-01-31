@@ -12,10 +12,8 @@ namespace GameArchitecture.Character.PlayerClone
         [SerializeField] private PlayerWeaponHolder _playerWeaponHolder;
         [SerializeField] private PlayerInputRecorder _playerInputRecorder;
         
-        private Weapon.Weapon _currentWeapon;
-        private List<Weapon.Weapon> _weaponList;
-
         private int _cloneNumber;
+        private int _weaponIndex;
         private ObjectPool<CloneEntity> _clonePool;
 
         private void Start()
@@ -28,21 +26,20 @@ namespace GameArchitecture.Character.PlayerClone
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space)) StartReplay();
+            // if (Input.GetKeyDown(KeyCode.Space)) StartReplay();
         }
 
-        private void StartReplay()
+        public void StartReplay()
         {
             _playerInputRecorder.StartRecord();
-            _currentWeapon = _playerWeaponHolder.CurrentWeapon;
-            _weaponList = _playerWeaponHolder.WeaponList;
+            _weaponIndex = _playerWeaponHolder.CurrentWeaponIndex;
             GetClone();
         }
 
         private void GetClone()
         {
             var clone = _clonePool.GetFreeElement();
-            clone.SetUpClone(_cloneNumber, _currentWeapon, _weaponList);
+            clone.SetUpClone(_cloneNumber, _weaponIndex);
             _cloneNumber++;
         }
 

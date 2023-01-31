@@ -10,12 +10,11 @@ namespace GameArchitecture.Character.PlayerClone
         [SerializeField] private CloneController _cloneController;
         [SerializeField] private CloneWeaponHolder _cloneWeaponHolder;
         
-        public void SetUpClone(int cloneNumber, Weapon.Weapon currentWeapon,
-            List<Weapon.Weapon> weaponList)
+        public void SetUpClone(int cloneNumber, int weaponIndex)
         {
             _cloneController.SetCloneNumber(cloneNumber);
             _cloneWeaponHolder.SetUpCloneWeaponHolder(_cloneController,
-                currentWeapon, weaponList);
+                weaponIndex);
         }
     }
 }

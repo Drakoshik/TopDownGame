@@ -83,6 +83,7 @@ namespace GameArchitecture.Character
             {
                 _playerAnimator.SetFloat(MovementX, _movementInput.x);
                 _playerAnimator.SetFloat(MovementY, _movementInput.y);
+                MoveInput = transform.position;
                 return;
             }
 

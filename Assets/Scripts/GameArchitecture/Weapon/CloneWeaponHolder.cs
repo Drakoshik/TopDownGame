@@ -19,11 +19,15 @@ namespace GameArchitecture.Weapon
         }
 
         public void SetUpCloneWeaponHolder(CloneController cloneController,
-            Weapon currentWeaponSet, List<Weapon> weaponListSet)
+            int weaponIndex)
         {
             _cloneController = cloneController;
-            CurrentWeapon = currentWeaponSet;
-            WeaponList = weaponListSet;
+            for (int i = 0; i < WeaponList.Count; i++)
+            {
+                if(i != weaponIndex) WeaponList[i].gameObject.SetActive(false);
+            }
+            CurrentWeapon = WeaponList[weaponIndex];
+            CurrentWeapon.gameObject.SetActive(true);
         }
 
         private void OnChangeWeapon()

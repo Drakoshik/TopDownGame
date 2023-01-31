@@ -51,7 +51,8 @@ namespace GameArchitecture.Character.PlayerClone
                 [_inScriptTimer];
             _playerAnimator.SetFloat(LastX, playerReplayData.LookInput.x);
             _playerAnimator.SetFloat(LastY, playerReplayData.LookInput.y);
-
+            
+            
             transform.position = (Vector3)playerReplayData.MovementInput;
             _playerAnimator.SetFloat(MovementX, playerReplayData.MovementInput.x);
             _playerAnimator.SetFloat(MovementY, playerReplayData.MovementInput.y);

@@ -12,6 +12,7 @@ namespace GameArchitecture.Weapon
         [field: SerializeField] public List<Weapon> WeaponList{ get; protected set; }
         
         [field: SerializeField] public GameObject Holder { get; protected set; }
+        [field: SerializeField] public int CurrentWeaponIndex { get; private set; }
         
         private bool _canRotate = true;
 
@@ -62,6 +63,20 @@ namespace GameArchitecture.Weapon
         private void CanRotate(bool isCan)
         {
             _canRotate = isCan;
+        }
+
+        public void CheckWeaponIndex()
+        {
+            for (var i = 0; i < WeaponList.Count; i++)
+            {
+                if (CurrentWeapon == WeaponList[i])
+                {
+                    CurrentWeaponIndex = i;
+                    return;
+                }
+            }
+
+            CurrentWeaponIndex = 0;
         }
     }
 }
