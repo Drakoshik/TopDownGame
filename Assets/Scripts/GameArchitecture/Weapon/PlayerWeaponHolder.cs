@@ -20,7 +20,15 @@ namespace GameArchitecture.Weapon
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
             _player.OnLookInput += ChangeWeaponDirection;
         }
-        
+
+        private void Update()
+        {
+            // if (_player.PlayerActions.Shoot.ReadValue<int>() != 0)
+            // {
+            //     print("alkjdfrghbnopeirub");
+            // }
+        }
+
 
         private void OnChangeWeapon(InputAction.CallbackContext obj)
         {
@@ -39,6 +47,40 @@ namespace GameArchitecture.Weapon
             AttackWeapon(_player.LookInput);
         }
         
-        
+        // public void ClickHoldRelease(InputAction.CallbackContext context)
+        // {
+        //     System.Type vector2Type = Vector2.zero.GetType();
+        //
+        //     string buttonControlPath = "/Mouse/leftButton";
+        //     //string deltaControlPath = "/Mouse/delta";
+        //
+        //     Debug.Log(context.control.path);
+        //     //Debug.Log(context.valueType);
+        //
+        //     if (context.started)
+        //     {
+        //         if (context.control.path == buttonControlPath)
+        //             //if (context.valueType != vector2Type)
+        //         {
+        //             Debug.Log("Button Pressed Down Event - called once when button pressed");
+        //         }
+        //     }
+        //     else if (context.performed)
+        //     {
+        //         if (context.control.path == buttonControlPath)
+        //             //if (context.valueType != vector2Type)
+        //         {
+        //             Debug.Log("Button Hold Down - called continously till the button is pressed");
+        //         }
+        //     }
+        //     else if (context.canceled)
+        //     {
+        //         if (context.control.path == buttonControlPath)
+        //             //if (context.valueType != vector2Type)
+        //         {
+        //             Debug.Log("Button released");
+        //         }
+        //     }
+        // }
     }
 }

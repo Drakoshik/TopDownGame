@@ -29,7 +29,6 @@ namespace GameArchitecture.Weapon
         public override void Attack(Vector2 direction)
         {
             if(!_canAttack) return;
-            base.Attack(direction);
             _value = 0;
             var bullet = BulletPool.GetFreeElement();
             bullet.SetDamage(Damage);

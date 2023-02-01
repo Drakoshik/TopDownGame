@@ -24,6 +24,7 @@ namespace GameArchitecture.Weapon
         protected void ChangeWeapon()
         {
             if (!_canRotate) return;
+            if(WeaponList.Count <= 1) return;
             if (CurrentWeapon == WeaponList[0])
             {
                 CurrentWeapon = WeaponList[1];
@@ -78,5 +79,7 @@ namespace GameArchitecture.Weapon
 
             CurrentWeaponIndex = 0;
         }
+        
+        
     }
 }
