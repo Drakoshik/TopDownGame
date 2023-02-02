@@ -16,17 +16,21 @@ namespace GameArchitecture.Weapon
             base.Start();
             CurrentWeapon = WeaponList[0];
             _player.InputActions.Player.Shoot.started += OnShoot;
+            _player.InputActions.Player.Shoot.canceled += OnShootCancel;
             _player.InputActions.Player.Reload.started += OnReload;
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
             _player.OnLookInput += ChangeWeaponDirection;
+            _player.OnLookInput += OnSetDirection;
         }
 
-        private void Update()
+        private void OnSetDirection(Vector3 obj)
         {
-            // if (_player.PlayerActions.Shoot.ReadValue<int>() != 0)
-            // {
-            //     print("alkjdfrghbnopeirub");
-            // }
+            SetDirection(_player.LookInput);
+        }
+
+        private void OnShootCancel(InputAction.CallbackContext obj)
+        {
+            StopAutoAttack();
         }
 
 
@@ -45,6 +49,8 @@ namespace GameArchitecture.Weapon
         private void OnShoot(InputAction.CallbackContext context)
         {
             AttackWeapon(_player.LookInput);
+            StartAutoAttack();
+            
         }
         
         // public void ClickHoldRelease(InputAction.CallbackContext context)

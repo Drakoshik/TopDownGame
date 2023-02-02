@@ -46,6 +46,28 @@ namespace GameArchitecture.Weapon
                 weapon.Reload();
             }
         }
+        protected void StartAutoAttack()
+        {
+            if (CurrentWeapon is SubmachineGun weapon)
+            {
+                weapon.StartAuto();
+            }
+        }
+        protected void StopAutoAttack()
+        {
+            if (CurrentWeapon is SubmachineGun weapon)
+            {
+                weapon.StopAuto();
+            }
+        }
+        
+        protected void SetDirection(Vector3 direction)
+        {
+            if (CurrentWeapon is SubmachineGun weapon)
+            {
+                weapon.SetDirection(direction);
+            }
+        }
         
         protected void AttackWeapon(Vector3 direction)
         {

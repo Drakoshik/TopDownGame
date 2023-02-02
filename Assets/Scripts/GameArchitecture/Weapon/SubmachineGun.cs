@@ -10,6 +10,7 @@ namespace GameArchitecture.Weapon
         [field: SerializeField] public int Magazine { get; set; }
         [field: SerializeField] public float ReloadTime { get; set; }
         
+        [SerializeField] protected bool IsAuto = false;
         [SerializeField] protected Transform BulletSpawnPlace;
         [SerializeField] protected float BulletSpeed;
         [SerializeField] private bool _isInfiniteAmmo;
@@ -18,6 +19,8 @@ namespace GameArchitecture.Weapon
         public float CurrentMagazine { get; set; }
         
         protected ObjectPool<Projectile> BulletPool;
+
+        private Vector2 _currentDirection;
 
         public override void Start()
         {
@@ -30,6 +33,7 @@ namespace GameArchitecture.Weapon
         public override void Attack(Vector2 direction)
         {
             if(!CanAttack) return;
+            _currentDirection = direction;
             StartCoroutine(Delay(AttackDelay));
             var bullet = BulletPool.GetFreeElement();
             bullet.SetDamage(Damage);
@@ -41,7 +45,12 @@ namespace GameArchitecture.Weapon
             bullet.gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        
+        private void Update()
+        {
+            if(!IsAuto) return;
+            Attack(_currentDirection);
+        }
+
 
         public void Reload()
         {
@@ -56,6 +65,21 @@ namespace GameArchitecture.Weapon
             var rotatedX = vector.x * MathF.Cos(angle) - vector.y * MathF.Sin(angle);
             var rotatedY = vector.x * MathF.Sin(angle) + vector.y * MathF.Cos(angle);
             return new Vector2(rotatedX, rotatedY);
+        }
+
+        public void StartAuto()
+        {
+            IsAuto = true;
+        }
+        
+        public void StopAuto()
+        {
+            IsAuto = false;
+        }
+        
+        public void SetDirection(Vector2 direction)
+        {
+            _currentDirection = direction;
         }
     }
 }
