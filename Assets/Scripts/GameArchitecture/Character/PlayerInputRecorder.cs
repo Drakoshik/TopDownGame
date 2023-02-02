@@ -13,13 +13,20 @@ namespace GameArchitecture.Character
         private bool _isShoot;
         private bool _isReload;
         private bool _isChangeWeapon;
+        private bool _isShootCancel;
         
         private void Start()
         {
             _player.InputActions.Player.Shoot.started += OnShoot;
+            _player.InputActions.Player.Shoot.canceled += OnShootCancel;
             _player.InputActions.Player.Reload.started += OnReload;
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
             StartRecord();
+        }
+
+        private void OnShootCancel(InputAction.CallbackContext obj)
+        {
+            _isShootCancel = true;
         }
 
         public void StartRecord()
@@ -41,6 +48,7 @@ namespace GameArchitecture.Character
         private void OnShoot(InputAction.CallbackContext obj)
         {
             _isShoot = true;
+            
         }
 
         // private void Update()
@@ -59,10 +67,11 @@ namespace GameArchitecture.Character
             _timer += Time.deltaTime;
             PlayerReplayData.PlayerReplays[PlayerReplayData.PlayerReplays.Count-1].
                 Add(_timer, new ReplayData(_player.MoveInput, _player.LookInput,
-                    _isShoot, _isReload, _isChangeWeapon));
+                    _isShoot, _isReload, _isChangeWeapon, _isShootCancel));
             _isShoot = false;
             _isReload = false;
             _isChangeWeapon = false;
+            _isShootCancel = false;
         }
     }
 }

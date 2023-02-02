@@ -13,9 +13,11 @@ namespace GameArchitecture.Weapon
             base.Start();
             
             _cloneController.OnShoot += OnShoot;
+            _cloneController.OnShootCancel += OnShootCancel;
             _cloneController.OnReload += OnReload;
             _cloneController.OnChangeWeapon += OnChangeWeapon;
             _cloneController.OnLook += ChangeWeaponDirection;
+            _cloneController.OnLook += OnSetDirection;
         }
 
         public void SetUpCloneWeaponHolder(CloneController cloneController,
@@ -28,6 +30,15 @@ namespace GameArchitecture.Weapon
             }
             CurrentWeapon = WeaponList[weaponIndex];
             CurrentWeapon.gameObject.SetActive(true);
+        }
+        private void OnSetDirection(Vector3 direction)
+        {
+            SetDirection(direction);
+        }
+
+        private void OnShootCancel()
+        {
+            StopAutoAttack();
         }
 
         private void OnChangeWeapon()
@@ -45,6 +56,7 @@ namespace GameArchitecture.Weapon
         private void OnShoot(Vector3 direction)
         {
             AttackWeapon(direction);
+            StartAutoAttack();
         }
     }
 }

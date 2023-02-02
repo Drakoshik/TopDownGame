@@ -3,9 +3,7 @@ using System.Collections;
 using GameArchitecture.Character;
 using GameArchitecture.Pool;
 using GameArchitecture.Weapon.Bullets;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace GameArchitecture.Enemy
 {
@@ -17,34 +15,35 @@ namespace GameArchitecture.Enemy
         [SerializeField] private bool _isShoot;
         [SerializeField] private EnemyProjectile _enemyProjectile;
         [SerializeField] private Transform _bulletSpawnPosition;
+        [SerializeField] private Transform _hpHolder;
         
         [SerializeField] private bool needToFlip;
         [SerializeField] private float _attackDelay;
         [SerializeField] private float _bulletSpeed = 5f;
 
 
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Animator _animator;
 
         public Action<float, float> OnTakeDamage;
         
-        private SpriteRenderer Sprite;
         private GameObject _target;
         private float _currentHealthPoints;
         private bool _isCanAttack;
         private ObjectPool<EnemyProjectile> _bulletPool;
-        private Animator _animator;
+        
 
         private void Start()
         {
-            Sprite = GetComponent<SpriteRenderer>();
-            
             _target = FindObjectOfType<PlayerMovement>().gameObject;
+            if(!_isShoot) return;
             _bulletPool = new ObjectPool<EnemyProjectile>(_enemyProjectile,
                 3, true);
-            
         }
 
         private void OnEnable()
         {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             _currentHealthPoints = _maxHealthPoints;
             _animator = GetComponent<Animator>();
             _animator.enabled = true;
@@ -55,16 +54,17 @@ namespace GameArchitecture.Enemy
         private void FixedUpdate()
         {
             if(!_isFollow) return;
+            Vector2 rotateVector = transform.position - _target.transform.position;
             transform.position = Vector2.MoveTowards(transform.position,
                 _target.transform.position, _speed * Time.deltaTime);
             
-            var angle = Mathf.Atan2(_target.transform.position.y,
-                _target.transform.position.x) * Mathf.Rad2Deg;
+            var angle = Mathf.Atan2(rotateVector.y,
+                rotateVector.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             Flip(MathF.Abs(angle) >= 90);
             if(!_isShoot) return;
             if(!_isCanAttack) return;
-            Shoot();
+            Shoot(-rotateVector.normalized);
         }
 
 
@@ -79,9 +79,8 @@ namespace GameArchitecture.Enemy
             OnTakeDamage?.Invoke(_currentHealthPoints, _maxHealthPoints);
         }
 
-        private void Shoot()
+        private void Shoot(Vector2 direction)
         {
-            var direction = _target.transform.position.normalized;
             StartCoroutine(Delay(_attackDelay));
             var bullet = _bulletPool.GetFreeElement();
             bullet.transform.position = _bulletSpawnPosition.position;
@@ -103,8 +102,15 @@ namespace GameArchitecture.Enemy
         public void Flip(bool flip)
         {
             if(!needToFlip) return;
-            if(flip == Sprite.flipY) return;
-            Sprite.flipY = flip;
+            if(flip == _spriteRenderer.flipY) return;
+            _spriteRenderer.flipY = flip;
+            if (_hpHolder != null)
+            {
+                _hpHolder.transform.localPosition = new Vector2(
+                    _hpHolder.transform.localPosition.x,
+                    -_hpHolder.transform.localPosition.y);
+            }
+            
         }
         
         private Vector2 GetAngleVector(Vector2 vector, float angle)

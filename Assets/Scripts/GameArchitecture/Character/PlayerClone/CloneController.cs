@@ -7,6 +7,7 @@ namespace GameArchitecture.Character.PlayerClone
     {
         public event Action<Vector3> OnLook; 
         public event Action<Vector3> OnShoot; 
+        public event Action OnShootCancel; 
         public event Action OnReload; 
         public event Action OnChangeWeapon; 
         
@@ -62,7 +63,7 @@ namespace GameArchitecture.Character.PlayerClone
 
         private void EndOfLifetimeAction()
         {
-            // gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
 
         private void InvokeActions(ReplayData playerReplayData)
@@ -71,6 +72,9 @@ namespace GameArchitecture.Character.PlayerClone
 
             if (playerReplayData.IsShoot) 
                 OnShoot?.Invoke(playerReplayData.LookInput);
+            
+            if (playerReplayData.IsShootCancel) 
+                OnShootCancel?.Invoke();
 
             if (playerReplayData.IsReload) 
                 OnReload?.Invoke();

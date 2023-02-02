@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameArchitecture.Enemy
@@ -10,15 +11,21 @@ namespace GameArchitecture.Enemy
         [SerializeField] private Transform _endPoint;
         [SerializeField] private float _speed;
         [SerializeField] private SpriteRenderer[] _enemySprites;
-
+        
 
         private void OnEnable()
         {
             _enemyContainer.position = _startPoint.position;
+            
             var angle = Mathf.Atan2(_endPoint.transform.position.y,
                 _endPoint.transform.position.x) * Mathf.Rad2Deg;
-            _enemyContainer.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            FlipSprites(MathF.Abs(angle) >= 90);
+            _enemyContainer.gameObject.SetActive(true);
+            foreach (var enemy in _enemySprites)
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.GetComponent<Enemy>().Flip(MathF.Abs(angle) >= 90);
+                enemy.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            }
         }
 
         private void FixedUpdate()
@@ -28,16 +35,6 @@ namespace GameArchitecture.Enemy
             if(_enemyContainer.position == _endPoint.transform.position) 
                 _enemyContainer.gameObject.SetActive(false);
         }
-
-        private void FlipSprites(bool flip)
-        {
-            foreach (var enemy in _enemySprites)
-            {
-                enemy.gameObject.SetActive(true);
-                if(flip == enemy.flipY) continue;
-                enemy.flipY = flip;
-            }
-            
-        }
+        
     }
 }

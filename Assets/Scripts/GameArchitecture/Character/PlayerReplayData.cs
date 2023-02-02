@@ -9,21 +9,24 @@ namespace GameArchitecture.Character
         public Vector2 MovementInput { get; private set;}
         public Vector2 LookInput { get; private set;}
         public bool IsShoot { get; private set;}
+        public bool IsShootCancel { get; private set;}
         public bool IsReload { get; private set;}
         public bool IsChangeWeapon { get; private set;}
 
 
 
         public ReplayData(Vector2 movementInput, Vector2 lookInput,
-            bool isShoot = false, bool isReload= false, bool isChangeWeapon= false)
+            bool isShoot = false, bool isReload = false, bool isChangeWeapon = false,
+            bool isShootCancel = false)
         {
             MovementInput = movementInput;
             LookInput = lookInput;
             IsShoot = isShoot;
             IsReload = isReload;
             IsChangeWeapon = isChangeWeapon;
+            IsShootCancel = isShootCancel;
         }
-        
+
     }
     
     public static class PlayerReplayData
