@@ -25,6 +25,8 @@ namespace GameArchitecture.Enemy
         {
             _enemyContainer.position = Vector2.MoveTowards(_enemyContainer.position,
                 _endPoint.transform.position, _speed * Time.deltaTime);
+            if(_enemyContainer.position == _endPoint.transform.position) 
+                _enemyContainer.gameObject.SetActive(false);
         }
 
         private void FlipSprites(bool flip)
@@ -32,7 +34,7 @@ namespace GameArchitecture.Enemy
             foreach (var enemy in _enemySprites)
             {
                 enemy.gameObject.SetActive(true);
-                if(flip == enemy.flipY) return;
+                if(flip == enemy.flipY) continue;
                 enemy.flipY = flip;
             }
             
