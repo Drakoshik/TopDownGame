@@ -33,6 +33,7 @@ namespace GameArchitecture.Character.PlayerClone
         {
             _playerInputRecorder.StartRecord();
             _weaponIndex = _playerWeaponHolder.CurrentWeaponIndex;
+            _clonePool.ResetActiveElements();
             GetClone();
         }
 
@@ -43,7 +44,7 @@ namespace GameArchitecture.Character.PlayerClone
             _cloneNumber++;
         }
 
-        private void TakeAwayClones()
+        public void TakeAwayClones()
         {
             _clonePool.HideAllElements();
             _cloneNumber = 0;

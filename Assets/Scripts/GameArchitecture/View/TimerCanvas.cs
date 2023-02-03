@@ -9,10 +9,17 @@ namespace GameArchitecture.View
         [SerializeField] private Transform _endSliderPoint;
         [SerializeField] private Transform _slider;
 
+        private Sequence _timerSequence;
+
         public void ResetSlider(float maxDuration)
         {
-            _slider.transform.localPosition = _startSliderPoint.transform.localPosition;
-            _slider.DOLocalMove(_endSliderPoint.localPosition, maxDuration);
+            _timerSequence.Kill();
+            _timerSequence = DOTween.Sequence();
+            _timerSequence.AppendCallback((delegate
+            {
+                _slider.transform.localPosition = _startSliderPoint.transform.localPosition;
+            }));
+            _timerSequence.Join(_slider.DOLocalMove(_endSliderPoint.localPosition, maxDuration));
         }
     }
 }

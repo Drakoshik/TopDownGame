@@ -21,7 +21,6 @@ namespace GameArchitecture.Character
             _player.InputActions.Player.Shoot.canceled += OnShootCancel;
             _player.InputActions.Player.Reload.started += OnReload;
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
-            StartRecord();
         }
 
         private void OnShootCancel(InputAction.CallbackContext obj)

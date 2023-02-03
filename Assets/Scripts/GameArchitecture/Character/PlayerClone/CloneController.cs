@@ -10,10 +10,12 @@ namespace GameArchitecture.Character.PlayerClone
         public event Action OnShootCancel; 
         public event Action OnReload; 
         public event Action OnChangeWeapon; 
+        public event Action OnEndOfLife; 
         
         
         
-        private int _cloneNumber;
+        
+        [SerializeField] private int _cloneNumber;
         private float _inScriptTimer;
         
         private Animator _playerAnimator;
@@ -31,6 +33,7 @@ namespace GameArchitecture.Character.PlayerClone
         private void OnEnable()
         {
             _inScriptTimer = 0;
+            SceneArchitect.Instance.AddNewTarget(transform);
         }
 
         public void SetCloneNumber(int cloneNumber)
@@ -63,7 +66,9 @@ namespace GameArchitecture.Character.PlayerClone
 
         private void EndOfLifetimeAction()
         {
-            gameObject.SetActive(false);
+            SceneArchitect.Instance.RemoveTarget(transform);
+            OnEndOfLife?.Invoke();
+            // gameObject.SetActive(false);
         }
 
         private void InvokeActions(ReplayData playerReplayData)

@@ -30,6 +30,11 @@ namespace GameArchitecture.Weapon
             CurrentMagazine = Magazine;
         }
 
+        private void OnDisable()
+        {
+            BulletPool.HideAllElements();
+        }
+
         public override void Attack(Vector2 direction)
         {
             if(!CanAttack) return;

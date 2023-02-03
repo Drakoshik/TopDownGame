@@ -33,6 +33,7 @@ namespace GameArchitecture
         {
             if (_sceneArchitect.GetTimerPercent() > _currentPercentObjectStep)
             {
+                if(_currentObjectNumber >= _enemys.Count) return;
                 _enemys[_currentObjectNumber].SetActive(true);
                 _currentPercentObjectStep += _percentObjectStep;
                 _currentObjectNumber++;

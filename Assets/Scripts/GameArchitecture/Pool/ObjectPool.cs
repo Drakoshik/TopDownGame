@@ -69,7 +69,17 @@ namespace GameArchitecture.Pool
         {
             return _pool;
         }
-    
 
+        public void ResetActiveElements()
+        {
+            foreach (var obj in _pool)
+            {
+                if (obj.gameObject.activeInHierarchy)
+                {
+                    obj.gameObject.SetActive(false);
+                    obj.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }

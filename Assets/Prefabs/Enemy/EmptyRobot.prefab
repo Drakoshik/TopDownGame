@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 4506787115183006759}
   - component: {fileID: 4506787115183006756}
   - component: {fileID: 4506787115183006757}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EmptyRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

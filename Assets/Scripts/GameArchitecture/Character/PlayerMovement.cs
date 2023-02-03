@@ -1,7 +1,11 @@
 using System;
+using System.Numerics;
 using GameArchitecture.Actions;
+using GameArchitecture.Weapon.Bullets;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace GameArchitecture.Character
 {
@@ -24,7 +28,8 @@ namespace GameArchitecture.Character
         private Camera _mainCamera;
 
         private Animator _playerAnimator;
-    
+
+        private bool _canMove = true;
     
         private static readonly int LastX = Animator.StringToHash("LastX");
         private static readonly int LastY = Animator.StringToHash("LastY");
@@ -45,11 +50,12 @@ namespace GameArchitecture.Character
 
         private void FixedUpdate()
         {
+            if(!_canMove) return;
             ReadMovementInput();
             Move();
             ReadLookInput();
         }
-
+        
         private void ReadMovementInput()
         {
             _movementInput = PlayerActions.Movement.ReadValue<Vector2>();
@@ -104,6 +110,7 @@ namespace GameArchitecture.Character
     
         private void OnEnable()
         {
+            _canMove = true;
             InputActions.Enable();
             InputChangeAction.OnInputChange += OnDeviceChange;
             
@@ -114,6 +121,19 @@ namespace GameArchitecture.Character
             InputActions.Disable();
             InputChangeAction.OnInputChange -= OnDeviceChange;
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.GetComponent<Enemy.Enemy>() || col.GetComponent<EnemyProjectile>())
+            {
+                SceneArchitect.OnPlayerDie?.Invoke();
+                _canMove = false;
+            }
+        }
+
+        public Vector2 GetMovementInput()
+        {
+            return _movementInput;
+        }
     }
 }

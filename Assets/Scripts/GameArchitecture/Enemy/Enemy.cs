@@ -27,7 +27,7 @@ namespace GameArchitecture.Enemy
 
         public Action<float, float> OnTakeDamage;
         
-        private GameObject _target;
+        private Transform _target;
         private float _currentHealthPoints;
         private bool _isCanAttack;
         private ObjectPool<EnemyProjectile> _bulletPool;
@@ -35,7 +35,6 @@ namespace GameArchitecture.Enemy
 
         private void Start()
         {
-            _target = FindObjectOfType<PlayerMovement>().gameObject;
             if(!_isShoot) return;
             _bulletPool = new ObjectPool<EnemyProjectile>(_enemyProjectile,
                 3, true);
@@ -51,9 +50,17 @@ namespace GameArchitecture.Enemy
             OnTakeDamage?.Invoke(_currentHealthPoints, _maxHealthPoints);
         }
 
+        private void OnDisable()
+        {
+            if(!_isShoot) return;
+            if(_bulletPool == null) return;
+            _bulletPool.HideAllElements();
+        }
+
         private void FixedUpdate()
         {
             if(!_isFollow) return;
+            _target = SceneArchitect.Instance.GetCurrentTarget();
             Vector2 rotateVector = transform.position - _target.transform.position;
             transform.position = Vector2.MoveTowards(transform.position,
                 _target.transform.position, _speed * Time.deltaTime);

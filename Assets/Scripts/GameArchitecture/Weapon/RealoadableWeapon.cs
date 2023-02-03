@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using GameArchitecture.Pool;
 using GameArchitecture.Weapon.Bullets;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
-using UnityEngine.Serialization;
+
 
 namespace GameArchitecture.Weapon
 {
