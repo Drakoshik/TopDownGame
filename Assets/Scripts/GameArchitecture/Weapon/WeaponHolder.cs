@@ -46,14 +46,14 @@ namespace GameArchitecture.Weapon
                 weapon.Reload();
             }
         }
-        protected void StartAutoAttack()
+        protected void StartAttack()
         {
             if (CurrentWeapon is SubmachineGun weapon)
             {
                 weapon.StartAuto();
             }
         }
-        protected void StopAutoAttack()
+        protected void StopAttack()
         {
             if (CurrentWeapon is SubmachineGun weapon)
             {

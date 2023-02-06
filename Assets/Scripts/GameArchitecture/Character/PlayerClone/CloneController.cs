@@ -67,6 +67,7 @@ namespace GameArchitecture.Character.PlayerClone
         private void EndOfLifetimeAction()
         {
             SceneArchitect.Instance.RemoveTarget(transform);
+            OnShootCancel?.Invoke();
             OnEndOfLife?.Invoke();
             // gameObject.SetActive(false);
         }

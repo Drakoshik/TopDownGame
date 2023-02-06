@@ -50,6 +50,7 @@ namespace GameArchitecture.Character.PlayerClone
 
         private void OnDieAction()
         {
+            _animator.enabled = false;
             Sprite.sprite = _deathSprite;
         }
         

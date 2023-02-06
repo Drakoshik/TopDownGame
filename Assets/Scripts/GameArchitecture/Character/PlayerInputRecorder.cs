@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows.WebCam;
 
 namespace GameArchitecture.Character
 {
@@ -14,13 +16,21 @@ namespace GameArchitecture.Character
         private bool _isReload;
         private bool _isChangeWeapon;
         private bool _isShootCancel;
-        
+
+        private bool _isRecording;
         private void Start()
         {
             _player.InputActions.Player.Shoot.started += OnShoot;
             _player.InputActions.Player.Shoot.canceled += OnShootCancel;
             _player.InputActions.Player.Reload.started += OnReload;
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
+
+            SceneArchitect.OnPlayerDie += StopRecording;
+        }
+
+        private void StopRecording()
+        {
+            _isRecording = false;
         }
 
         private void OnShootCancel(InputAction.CallbackContext obj)
@@ -30,6 +40,7 @@ namespace GameArchitecture.Character
 
         public void StartRecord()
         {
+            _isRecording = true;
             _timer = 0;
             PlayerReplayData.PlayerReplays.Add(new Dictionary<float, ReplayData>());
         }
@@ -47,21 +58,11 @@ namespace GameArchitecture.Character
         private void OnShoot(InputAction.CallbackContext obj)
         {
             _isShoot = true;
-            
         }
-
-        // private void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.Space))
-        //     {
-        //         _timer = 0;
-        //         PlayerReplayData.PlayerReplays.Add(new Dictionary<float, ReplayData>());
-        //         print(PlayerReplayData.PlayerReplays.Count);
-        //     }
-        // }
 
         private void FixedUpdate()
         {
+            if(!_isRecording) return;
             if(PlayerReplayData.PlayerReplays.Count <= 0) return;
             _timer += Time.deltaTime;
             PlayerReplayData.PlayerReplays[PlayerReplayData.PlayerReplays.Count-1].

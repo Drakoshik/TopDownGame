@@ -123,6 +123,7 @@ MonoBehaviour:
   Sprite: {fileID: 1894749102}
   _startSprite: {fileID: 21300000, guid: 210092b7c46601a4aa02cb8413882975, type: 3}
   _deathSprite: {fileID: 21300000, guid: d3f97a80e6f059e49a1ae27f51709a4b, type: 3}
+  currentPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &467808693604083458
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +228,7 @@ MonoBehaviour:
   needToFlip: 1
   <Magazine>k__BackingField: 100
   <ReloadTime>k__BackingField: 0
+  _isCanShootAuto: 1
   IsAuto: 0
   BulletSpawnPlace: {fileID: 5322078312468571549}
   BulletSpeed: 10

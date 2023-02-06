@@ -23,12 +23,6 @@ namespace GameArchitecture.Character.PlayerClone
                 3, true);
         }
 
-
-        private void Update()
-        {
-            // if (Input.GetKeyDown(KeyCode.Space)) StartReplay();
-        }
-
         public void StartReplay()
         {
             _playerInputRecorder.StartRecord();

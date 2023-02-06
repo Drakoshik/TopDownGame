@@ -21,72 +21,46 @@ namespace GameArchitecture.Weapon
             _player.InputActions.Player.ChangeWeapon.started += OnChangeWeapon;
             _player.OnLookInput += ChangeWeaponDirection;
             _player.OnLookInput += OnSetDirection;
+            SceneArchitect.OnPlayerDie += StopShoot;
+        }
+
+        private void StopShoot()
+        {
+            StopAttack();
         }
 
         private void OnSetDirection(Vector3 obj)
         {
+            if(!_player.GetCanMove()) return;
             SetDirection(_player.LookInput);
         }
 
         private void OnShootCancel(InputAction.CallbackContext obj)
         {
-            StopAutoAttack();
+            StopAttack();
         }
 
 
         private void OnChangeWeapon(InputAction.CallbackContext obj)
         {
+            if(!_player.GetCanMove()) return;
             ChangeWeapon();
         }
         
 
         private void OnReload(InputAction.CallbackContext obj)
         {
+            if(!_player.GetCanMove()) return;
             ReloadWeapon();
         }
         
 
         private void OnShoot(InputAction.CallbackContext context)
         {
+            if(!_player.GetCanMove()) return;
             AttackWeapon(_player.LookInput);
-            StartAutoAttack();
+            StartAttack();
             
         }
-        
-        // public void ClickHoldRelease(InputAction.CallbackContext context)
-        // {
-        //     System.Type vector2Type = Vector2.zero.GetType();
-        //
-        //     string buttonControlPath = "/Mouse/leftButton";
-        //     //string deltaControlPath = "/Mouse/delta";
-        //
-        //     Debug.Log(context.control.path);
-        //     //Debug.Log(context.valueType);
-        //
-        //     if (context.started)
-        //     {
-        //         if (context.control.path == buttonControlPath)
-        //             //if (context.valueType != vector2Type)
-        //         {
-        //             Debug.Log("Button Pressed Down Event - called once when button pressed");
-        //         }
-        //     }
-        //     else if (context.performed)
-        //     {
-        //         if (context.control.path == buttonControlPath)
-        //             //if (context.valueType != vector2Type)
-        //         {
-        //             Debug.Log("Button Hold Down - called continously till the button is pressed");
-        //         }
-        //     }
-        //     else if (context.canceled)
-        //     {
-        //         if (context.control.path == buttonControlPath)
-        //             //if (context.valueType != vector2Type)
-        //         {
-        //             Debug.Log("Button released");
-        //         }
-        //     }
-        // }
     }
 }

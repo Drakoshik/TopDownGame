@@ -67,6 +67,7 @@ namespace GameArchitecture
 
         private void ResetLevel()
         {
+            _uiCanvas.ShowBackInTime();
             _canInput = true;
             _levels[_level].SetActive(false);
             _currentState = GameState.GameReset;

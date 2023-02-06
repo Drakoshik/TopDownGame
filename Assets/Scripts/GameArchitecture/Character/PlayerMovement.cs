@@ -135,5 +135,10 @@ namespace GameArchitecture.Character
         {
             return _movementInput;
         }
+
+        public bool GetCanMove()
+        {
+            return _canMove;
+        }
     }
 }

@@ -38,7 +38,7 @@ namespace GameArchitecture.Weapon
 
         private void OnShootCancel()
         {
-            StopAutoAttack();
+            StopAttack();
         }
 
         private void OnChangeWeapon()
@@ -56,7 +56,7 @@ namespace GameArchitecture.Weapon
         private void OnShoot(Vector3 direction)
         {
             AttackWeapon(direction);
-            StartAutoAttack();
+            StartAttack();
         }
     }
 }
