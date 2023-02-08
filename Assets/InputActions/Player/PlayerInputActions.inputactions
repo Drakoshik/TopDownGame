@@ -247,6 +247,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "InGame",
+            "id": "317f906e-1345-4126-b525-ff5a56d65799",
+            "actions": [
+                {
+                    "name": "ActiveButton",
+                    "type": "Button",
+                    "id": "9b83dd8f-0324-40ae-8c65-93b034a75d68",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fbaf6d51-a524-4452-8270-02d77f7c2964",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ActiveButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

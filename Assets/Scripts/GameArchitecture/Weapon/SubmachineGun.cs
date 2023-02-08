@@ -10,12 +10,13 @@ namespace GameArchitecture.Weapon
         [field: SerializeField] public int Magazine { get; set; }
         [field: SerializeField] public float ReloadTime { get; set; }
         [SerializeField] private bool _isCanShootAuto;
-        [SerializeField] protected bool IsAuto = false;
         [SerializeField] protected Transform BulletSpawnPlace;
         [SerializeField] protected float BulletSpeed;
         [SerializeField] private bool _isInfiniteAmmo;
         
         [SerializeField] private Projectile _bulletPrefab;
+        
+        protected bool IsAuto = false;
         public float CurrentMagazine { get; set; }
         
         protected ObjectPool<Projectile> BulletPool;

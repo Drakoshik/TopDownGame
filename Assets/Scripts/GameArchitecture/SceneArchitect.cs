@@ -5,6 +5,7 @@ using GameArchitecture.Character.PlayerClone;
 using GameArchitecture.View;
 using GameArchitecture.Weapon;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 using UnityEngine.XR;
 using Random = UnityEngine.Random;
@@ -23,7 +24,7 @@ namespace GameArchitecture
         public static SceneArchitect Instance;
         public static Action OnPlayerDie;
         public float GlobalTimer { get; private set; }
-        
+
         [SerializeField] private GameObject[] _spawnPlaces;
         [SerializeField] private PlayerMovement _player;
         [SerializeField] private PlayerInputRecorder _playerInputRecorder;
@@ -63,6 +64,32 @@ namespace GameArchitecture
             _currentState = GameState.GameStart;
            OnPlayerDie += ResetLevel;
            _uiCanvas.ShowTitle();
+           _player.InputActions.InGame.ActiveButton.started += GameStateStart;
+        }
+
+        private void GameStateStart(InputAction.CallbackContext obj)
+        {
+            print("d.m,fgjh n");
+            if(!_canInput) return;
+            switch (_currentState)
+            {
+                case GameState.GameStart:
+                    _level = 0;
+                    _playerInputRecorder.StartRecord();
+                    _uiCanvas.HideTitle();
+                    break;
+                case GameState.GameReset:
+                    _cloneManager.StartReplay();
+                    _uiCanvas.HideBackInTime();
+                    break;
+                case GameState.NextLevelStart:
+                    _cloneManager.TakeAwayClones();
+                    _uiCanvas.HideBackInTime();
+                    break;
+            }
+            ResetScene();
+            _canInput = false;
+            _isTimeEnd = false;
         }
 
         private void ResetLevel()
@@ -72,34 +99,7 @@ namespace GameArchitecture
             _levels[_level].SetActive(false);
             _currentState = GameState.GameReset;
         }
-
-        private void Update()
-        {
-            if(!_canInput) return;
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                switch (_currentState)
-                {
-                    case GameState.GameStart:
-                        _level = 0;
-                        _playerInputRecorder.StartRecord();
-                        _uiCanvas.HideTitle();
-                        break;
-                    case GameState.GameReset:
-                        _cloneManager.StartReplay();
-                        _uiCanvas.HideBackInTime();
-                        break;
-                    case GameState.NextLevelStart:
-                        _cloneManager.TakeAwayClones();
-                        _uiCanvas.HideBackInTime();
-                        break;
-                }
-                ResetScene();
-                _canInput = false;
-                _isTimeEnd = false; 
-                
-            }
-        }
+        
 
         public GameState GetCurrentGameState()
         {

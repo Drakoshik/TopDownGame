@@ -269,6 +269,34 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""InGame"",
+            ""id"": ""317f906e-1345-4126-b525-ff5a56d65799"",
+            ""actions"": [
+                {
+                    ""name"": ""ActiveButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""9b83dd8f-0324-40ae-8c65-93b034a75d68"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fbaf6d51-a524-4452-8270-02d77f7c2964"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ActiveButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -310,6 +338,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("ChangeWeapon", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
+        // InGame
+        m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
+        m_InGame_ActiveButton = m_InGame.FindAction("ActiveButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -446,6 +477,39 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // InGame
+    private readonly InputActionMap m_InGame;
+    private IInGameActions m_InGameActionsCallbackInterface;
+    private readonly InputAction m_InGame_ActiveButton;
+    public struct InGameActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public InGameActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ActiveButton => m_Wrapper.m_InGame_ActiveButton;
+        public InputActionMap Get() { return m_Wrapper.m_InGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InGameActions set) { return set.Get(); }
+        public void SetCallbacks(IInGameActions instance)
+        {
+            if (m_Wrapper.m_InGameActionsCallbackInterface != null)
+            {
+                @ActiveButton.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnActiveButton;
+                @ActiveButton.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnActiveButton;
+                @ActiveButton.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnActiveButton;
+            }
+            m_Wrapper.m_InGameActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ActiveButton.started += instance.OnActiveButton;
+                @ActiveButton.performed += instance.OnActiveButton;
+                @ActiveButton.canceled += instance.OnActiveButton;
+            }
+        }
+    }
+    public InGameActions @InGame => new InGameActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -473,5 +537,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
+    }
+    public interface IInGameActions
+    {
+        void OnActiveButton(InputAction.CallbackContext context);
     }
 }
