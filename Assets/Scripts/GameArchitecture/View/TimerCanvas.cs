@@ -21,5 +21,10 @@ namespace GameArchitecture.View
             }));
             _timerSequence.Join(_slider.DOLocalMove(_endSliderPoint.localPosition, maxDuration));
         }
+
+        public void StopSlider()
+        {
+            _timerSequence.Kill();
+        }
     }
 }

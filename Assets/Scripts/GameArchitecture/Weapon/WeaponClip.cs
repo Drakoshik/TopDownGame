@@ -1,4 +1,8 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace GameArchitecture.Weapon
@@ -6,20 +10,24 @@ namespace GameArchitecture.Weapon
     [Serializable]
     public class WeaponClip
     {
-        [SerializeField] private int _clip;
+        public Action OnShoot;
+        [SerializeField] private float _ammunition;
+        [SerializeField] private float _clip;
         [SerializeField] private float _reloadTime;
         private float _currentClip;
+        
+        
 
-        // public WeaponClip(int clip, float reloadTime, float currentClip)
+        // public void Reload()
         // {
-        //     _clip = clip;
-        //     _reloadTime = reloadTime;
-        //     _currentClip = currentClip;
+        //     StartCoroutine();
         // }
-        
-        public void Reload()
+
+        public async Task Reload()
         {
-        
+            await Task.Delay((int)(_reloadTime * 1000));
+            _ammunition -= _currentClip;
+            _currentClip = _clip;
         }
     }
 }

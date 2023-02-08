@@ -15,6 +15,8 @@ namespace GameArchitecture
 
     public enum GameState
     {
+        Menu,
+        PlayerDied,
         GameStart,
         GameReset,
         NextLevelStart
@@ -61,7 +63,7 @@ namespace GameArchitecture
         {
             _targetList = new List<Transform>();
             _targetList.Add(_player.transform);
-            _currentState = GameState.GameStart;
+            _currentState = GameState.Menu;
            OnPlayerDie += ResetLevel;
            _uiCanvas.ShowTitle();
            _player.InputActions.InGame.ActiveButton.started += GameStateStart;
@@ -69,14 +71,19 @@ namespace GameArchitecture
 
         private void GameStateStart(InputAction.CallbackContext obj)
         {
-            print("d.m,fgjh n");
             if(!_canInput) return;
             switch (_currentState)
             {
-                case GameState.GameStart:
+                case GameState.Menu:
                     _level = 0;
                     _playerInputRecorder.StartRecord();
                     _uiCanvas.HideTitle();
+                    _currentState = GameState.GameStart;
+                    break;
+                case GameState.PlayerDied:
+                    _currentState = GameState.GameReset;
+                    _cloneManager.StartReplay();
+                    _uiCanvas.HideBackInTime();
                     break;
                 case GameState.GameReset:
                     _cloneManager.StartReplay();
@@ -94,10 +101,11 @@ namespace GameArchitecture
 
         private void ResetLevel()
         {
+            _timerCanvas.StopSlider();
             _uiCanvas.ShowBackInTime();
             _canInput = true;
             _levels[_level].SetActive(false);
-            _currentState = GameState.GameReset;
+            _currentState = GameState.PlayerDied;
         }
         
 
@@ -108,6 +116,8 @@ namespace GameArchitecture
 
         private void FixedUpdate()
         {
+            print(_currentState);
+            if(_currentState is GameState.Menu or GameState.PlayerDied) return;
             GlobalTimer += Time.deltaTime;
             if(_isTimeEnd) return;
             if (GlobalTimer >= _timeForLevel)

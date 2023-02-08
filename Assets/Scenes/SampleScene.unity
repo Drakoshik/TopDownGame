@@ -5146,8 +5146,9 @@ MonoBehaviour:
   Ammunition: 0
   needToFlip: 0
   _weaponClip:
+    _ammunition: 0
     _clip: 0
-    _reloadTime: 0
+    _reloadTime: 3
 --- !u!1 &992183184 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1931643035375283980, guid: f61261336c9ad4f4dbf97c696cda659e, type: 3}
