@@ -1,5 +1,5 @@
 using System;
-using System.Numerics;
+using System.Collections;
 using GameArchitecture.Actions;
 using GameArchitecture.Weapon.Bullets;
 using UnityEngine;
@@ -14,6 +14,7 @@ namespace GameArchitecture.Character
         [SerializeField] private float speedMultiplier = 5f;
 
         [SerializeField] private GameObject crossHair;
+        [SerializeField] private float _invulTime;
         public PlayerInputActions InputActions { get; private set; }
         public PlayerInputActions.PlayerActions PlayerActions { get; private set; }
 
@@ -30,6 +31,10 @@ namespace GameArchitecture.Character
         private Animator _playerAnimator;
 
         private bool _canMove = true;
+
+        private bool _invulnerability;
+
+        private Vector2 _dashDirection;
     
         private static readonly int LastX = Animator.StringToHash("LastX");
         private static readonly int LastY = Animator.StringToHash("LastY");
@@ -41,11 +46,20 @@ namespace GameArchitecture.Character
             InputActions = new PlayerInputActions();
             PlayerActions = InputActions.Player;
             _playerAnimator = GetComponent<Animator>();
+            PlayerActions.Dash.started += Dash;
+        }
+
+        private void Dash(InputAction.CallbackContext obj)
+        {
+            StartCoroutine(StartInvulFrames());
+            _dashDirection = _movementInput.normalized;
+            
         }
 
         private void Start()
         {
             _mainCamera = Camera.main;
+            _invulnerability = false;
         }
 
         private void FixedUpdate()
@@ -124,6 +138,7 @@ namespace GameArchitecture.Character
 
         private void OnTriggerEnter2D(Collider2D col)
         {
+            if(_invulnerability) return;
             if (col.GetComponent<Enemy.Enemy>() || col.GetComponent<EnemyProjectile>())
             {
                 SceneArchitect.OnPlayerDie?.Invoke();
@@ -139,6 +154,13 @@ namespace GameArchitecture.Character
         public bool GetCanMove()
         {
             return _canMove;
+        }
+
+        private IEnumerator StartInvulFrames()
+        {
+            _invulnerability = true;
+            yield return new WaitForSeconds(_invulTime);
+            _invulnerability = false;
         }
     }
 }

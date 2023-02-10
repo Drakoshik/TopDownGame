@@ -1,0 +1,28 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "H:/Global_graphics/AZTEC",
+    "last.imagePath": "H:/Global_graphics/Souls/1",
+    "map.lastUsedExportFilter": "JavaScript map-файлы (*.js)",
+    "map.lastUsedFormat": "json",
+    "openFiles": [
+    ],
+    "project": "roug.tiled-project",
+    "recentFiles": [
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

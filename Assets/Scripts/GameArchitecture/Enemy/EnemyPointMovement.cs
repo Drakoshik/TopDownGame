@@ -23,7 +23,6 @@ namespace GameArchitecture.Enemy
             foreach (var enemy in _enemySprites)
             {
                 enemy.gameObject.SetActive(true);
-                enemy.GetComponent<Enemy>().Flip(MathF.Abs(angle) >= 90);
                 enemy.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             }
         }

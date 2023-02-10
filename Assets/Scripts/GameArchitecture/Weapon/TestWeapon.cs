@@ -19,7 +19,7 @@ namespace GameArchitecture.Weapon
 
         private void OnEnable()
         {
-            _weaponClip.Reload();
+            
         }
 
         public override void Attack(Vector2 direction)

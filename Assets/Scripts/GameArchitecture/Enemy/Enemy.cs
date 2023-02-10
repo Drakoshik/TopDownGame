@@ -17,7 +17,6 @@ namespace GameArchitecture.Enemy
         [SerializeField] private Transform _bulletSpawnPosition;
         [SerializeField] private Transform _hpHolder;
         
-        [SerializeField] private bool needToFlip;
         [SerializeField] private float _attackDelay;
         [SerializeField] private float _bulletSpeed = 5f;
 
@@ -65,13 +64,12 @@ namespace GameArchitecture.Enemy
             transform.position = Vector2.MoveTowards(transform.position,
                 _target.transform.position, _speed * Time.deltaTime);
             
-            var angle = Mathf.Atan2(rotateVector.y,
-                rotateVector.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            Flip(MathF.Abs(angle) >= 90);
-            if(!_isShoot) return;
-            if(!_isCanAttack) return;
-            Shoot(-rotateVector.normalized);
+            // var angle = Mathf.Atan2(rotateVector.y,
+            //     rotateVector.x) * Mathf.Rad2Deg;
+            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // if(!_isShoot) return;
+            // if(!_isCanAttack) return;
+            // Shoot(-rotateVector.normalized);
         }
 
 
@@ -105,21 +103,7 @@ namespace GameArchitecture.Enemy
             yield return new WaitForSeconds(delay);
             _isCanAttack = true;
         }
-        
-        public void Flip(bool flip)
-        {
-            if(!needToFlip) return;
-            if(flip == _spriteRenderer.flipY) return;
-            _spriteRenderer.flipY = flip;
-            if (_hpHolder != null)
-            {
-                _hpHolder.transform.localPosition = new Vector2(
-                    _hpHolder.transform.localPosition.x,
-                    -_hpHolder.transform.localPosition.y);
-            }
-            
-        }
-        
+
         private Vector2 GetAngleVector(Vector2 vector, float angle)
         {
             var rotatedX = vector.x * MathF.Cos(angle) - vector.y * MathF.Sin(angle);
