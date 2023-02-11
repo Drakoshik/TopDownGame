@@ -35,6 +35,7 @@ namespace GameArchitecture.Character
         private bool _invulnerability;
 
         private Vector2 _dashDirection;
+        private bool _isDashing;
     
         private static readonly int LastX = Animator.StringToHash("LastX");
         private static readonly int LastY = Animator.StringToHash("LastY");
@@ -51,9 +52,10 @@ namespace GameArchitecture.Character
 
         private void Dash(InputAction.CallbackContext obj)
         {
-            StartCoroutine(StartInvulFrames());
+            if (_movementInput == Vector2.zero) return;
+            print("sldkfhjgb");
+            StartCoroutine(StartDash());
             _dashDirection = _movementInput.normalized;
-            
         }
 
         private void Start()
@@ -65,11 +67,21 @@ namespace GameArchitecture.Character
         private void FixedUpdate()
         {
             if(!_canMove) return;
+            ReadLookInput();
+            if (_isDashing)
+            {
+                DashMove();
+                return;
+            }
             ReadMovementInput();
             Move();
-            ReadLookInput();
         }
-        
+
+        private void DashMove()
+        {
+            
+        }
+
         private void ReadMovementInput()
         {
             _movementInput = PlayerActions.Movement.ReadValue<Vector2>();
@@ -156,11 +168,13 @@ namespace GameArchitecture.Character
             return _canMove;
         }
 
-        private IEnumerator StartInvulFrames()
+        private IEnumerator StartDash()
         {
             _invulnerability = true;
+            _isDashing = true;
             yield return new WaitForSeconds(_invulTime);
             _invulnerability = false;
+            _isDashing = false;
         }
     }
 }
