@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using GameArchitecture.Actions;
+using GameArchitecture.Interfaces.ForDealDamage;
 using GameArchitecture.Weapon.Bullets;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,11 +37,14 @@ namespace GameArchitecture.Character
 
         private Vector2 _dashDirection;
         private bool _isDashing;
+
+        private Rigidbody2D _rigidbody2D;
     
         private static readonly int LastX = Animator.StringToHash("LastX");
         private static readonly int LastY = Animator.StringToHash("LastY");
         private static readonly int MovementX = Animator.StringToHash("MovementX");
         private static readonly int MovementY = Animator.StringToHash("MovementY");
+        private static readonly int DashAnimation = Animator.StringToHash("Dash");
 
         private void Awake()
         {
@@ -48,12 +52,13 @@ namespace GameArchitecture.Character
             PlayerActions = InputActions.Player;
             _playerAnimator = GetComponent<Animator>();
             PlayerActions.Dash.started += Dash;
+            _rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         private void Dash(InputAction.CallbackContext obj)
         {
             if (_movementInput == Vector2.zero) return;
-            print("sldkfhjgb");
+            if(_isDashing) return;
             StartCoroutine(StartDash());
             _dashDirection = _movementInput.normalized;
         }
@@ -79,12 +84,14 @@ namespace GameArchitecture.Character
 
         private void DashMove()
         {
-            
+            _rigidbody2D.velocity = new Vector2(_dashDirection.x * 15,
+                _dashDirection.y * 15);  
         }
 
         private void ReadMovementInput()
         {
             _movementInput = PlayerActions.Movement.ReadValue<Vector2>();
+            _rigidbody2D.velocity = Vector2.zero;
         }
 
         private void ReadLookInput()
@@ -151,10 +158,11 @@ namespace GameArchitecture.Character
         private void OnTriggerEnter2D(Collider2D col)
         {
             if(_invulnerability) return;
-            if (col.GetComponent<Enemy.Enemy>() || col.GetComponent<EnemyProjectile>())
+            if (col.GetComponent<IDealsDamageToPlayer>() != null)
             {
-                SceneArchitect.OnPlayerDie?.Invoke();
-                _canMove = false;
+                // SceneArchitect.OnPlayerDie?.Invoke();
+                // _canMove = false;
+                Debug.Log("Player died!");
             }
         }
 
@@ -172,8 +180,11 @@ namespace GameArchitecture.Character
         {
             _invulnerability = true;
             _isDashing = true;
+            _playerAnimator.SetBool(DashAnimation, true);
             yield return new WaitForSeconds(_invulTime);
             _invulnerability = false;
+            _playerAnimator.SetBool(DashAnimation, false);
+            yield return new WaitForSeconds(.2f);
             _isDashing = false;
         }
     }

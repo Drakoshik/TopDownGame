@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -127,7 +127,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 661c03549c0feec4580138a335cea534
+      internalID: -1328735243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e0f87ec2a2e3e46b381372b607cc4f
+      internalID: 2059531942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61a299ced17a6a5478c0e61ac114d213
+      internalID: -1853076036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 034874a84c7bc3c4889edc9b8bb3054e
+      internalID: 1065144324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 0
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72bd9849c5ff4a74f9c1267b18ea4158
+      internalID: -1729801451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 0
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbfc75f7b2b707744a5f215ca1f6ef73
+      internalID: 1054596854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec9ce14c93e2df419e1b641579f4ad0
+      internalID: 1755544908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 0
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dd8806d5a9db294b89ab8977087d767
+      internalID: 919793421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f8d29a8341b34641ab2542cec5d3be2
+      internalID: 1003339323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 0
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2b05e2d3685eec4499849936578a153
+      internalID: -549647277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-walk-000-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 0
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 769b2a20bd044d0439c6e67e90266b0a
+      internalID: -1013242786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +369,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_enemy2-walk-000-Sheet_3: 1065144324
+      spr_enemy2-walk-000-Sheet_4: -1729801451
+      spr_enemy2-walk-000-Sheet_10: -1013242786
+      spr_enemy2-walk-000-Sheet_6: 1755544908
+      spr_enemy2-walk-000-Sheet_9: -549647277
+      spr_enemy2-walk-000-Sheet_2: -1853076036
+      spr_enemy2-walk-000-Sheet_7: 919793421
+      spr_enemy2-walk-000-Sheet_0: -1328735243
+      spr_enemy2-walk-000-Sheet_8: 1003339323
+      spr_enemy2-walk-000-Sheet_5: 1054596854
+      spr_enemy2-walk-000-Sheet_1: 2059531942
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

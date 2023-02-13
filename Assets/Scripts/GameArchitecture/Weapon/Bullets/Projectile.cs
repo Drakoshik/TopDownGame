@@ -43,8 +43,8 @@ namespace GameArchitecture.Weapon.Bullets
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            if(col.GetComponent<Enemy.Enemy>()) 
-                col.GetComponent<Enemy.Enemy>().GetDamage(_damage);
+            if(col.GetComponent<Enemy.EnemyLegacy>()) 
+                col.GetComponent<Enemy.EnemyLegacy>().GetDamage(_damage);
             if(needToHide) gameObject.SetActive(false);
             if(_animator == null) return;
             if(col.GetComponent<Projectile>()) return;

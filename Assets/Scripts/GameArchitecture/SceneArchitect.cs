@@ -61,11 +61,10 @@ namespace GameArchitecture
 
         private void Start()
         {
-            _targetList = new List<Transform>();
-            _targetList.Add(_player.transform);
-            _currentState = GameState.Menu;
+            _targetList = new List<Transform> { _player.transform };
+            _currentState = GameState.GameStart;
            OnPlayerDie += ResetLevel;
-           _uiCanvas.ShowTitle();
+           // _uiCanvas.ShowTitle();
            _player.InputActions.InGame.ActiveButton.started += GameStateStart;
         }
 
@@ -118,7 +117,7 @@ namespace GameArchitecture
         {
             print(_currentState);
             if(_currentState is GameState.Menu or GameState.PlayerDied) return;
-            GlobalTimer += Time.deltaTime;
+            // GlobalTimer += Time.deltaTime;
             if(_isTimeEnd) return;
             if (GlobalTimer >= _timeForLevel)
             {

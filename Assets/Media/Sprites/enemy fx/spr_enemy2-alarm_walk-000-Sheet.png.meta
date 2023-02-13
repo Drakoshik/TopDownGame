@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -127,7 +127,238 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dc4cd25bf593684e9d4ab0272f8398c
+      internalID: -1483329857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 0
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a166fff706a6345a2003920931c570
+      internalID: -406516527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52a969fe4711a674da0b6901d57b6ca2
+      internalID: -187137967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7764230094b3e49438cdcec03f52e842
+      internalID: -1723127050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 0
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3818cc9437b493f4cbbf7948a248cf2c
+      internalID: 259104434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 0
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a0c4b4a7b31a894a87d45423470347d
+      internalID: 1763893252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 0
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdf2e846e0ee4604683509a0262e244a
+      internalID: -1888616835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 0
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c17031779e7df5a4c9994d3b87ccbfbd
+      internalID: -507712319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 0
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b37e85663cd85ad4283d7dae503a4d57
+      internalID: 1141477811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 0
+        width: 16
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94259fa85e2f1b54b8e9c0dc194f508b
+      internalID: -1740871090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spr_enemy2-alarm_walk-000-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 0
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 638fc9d3ea49cbf42ad965ab626c4e2a
+      internalID: 2004125932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -138,7 +369,18 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_enemy2-alarm_walk-000-Sheet_10: 2004125932
+      spr_enemy2-alarm_walk-000-Sheet_4: 259104434
+      spr_enemy2-alarm_walk-000-Sheet_5: 1763893252
+      spr_enemy2-alarm_walk-000-Sheet_6: -1888616835
+      spr_enemy2-alarm_walk-000-Sheet_0: -1483329857
+      spr_enemy2-alarm_walk-000-Sheet_3: -1723127050
+      spr_enemy2-alarm_walk-000-Sheet_9: -1740871090
+      spr_enemy2-alarm_walk-000-Sheet_2: -187137967
+      spr_enemy2-alarm_walk-000-Sheet_8: 1141477811
+      spr_enemy2-alarm_walk-000-Sheet_7: -507712319
+      spr_enemy2-alarm_walk-000-Sheet_1: -406516527
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -6,12 +6,12 @@ namespace GameArchitecture.View
 {
     public class EnemyHpView : MonoBehaviour
     {
-        [SerializeField] private Enemy.Enemy _enemy;
+        [SerializeField] private Enemy.EnemyLegacy enemyLegacy;
         [SerializeField] private Image healthBar;
 
         private void Start()
         {
-            _enemy.OnTakeDamage += UpdateHealthBar;
+            enemyLegacy.OnTakeDamage += UpdateHealthBar;
         }
 
 
